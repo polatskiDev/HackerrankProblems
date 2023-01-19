@@ -2,6 +2,7 @@ package com.example.problems;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
@@ -81,5 +82,52 @@ public class Result {
                 return nonLonely;
         }
         return nonLonely;
+    }
+
+    public static int diagonalDifference(List<List<Integer>> arr) {
+        // Write your code here
+        int primaryDiagonal = 0;
+        int secondaryDiagonal = 0;
+        int len = arr.size();
+        int i =0;
+        while (i< len) {
+            for (List<Integer> innerList : arr){
+                primaryDiagonal += innerList.get(i);
+                secondaryDiagonal += innerList.get(len-1-i);
+                i++;
+            }
+        }
+        int total = primaryDiagonal - secondaryDiagonal;
+        return Math.abs(total);
+    }
+
+    public static List<Integer> countingSort(List<Integer> arr) {
+        // Write your code here
+        List<Integer> returnList = new ArrayList<>();
+        for (int i = 0; i<100; i++){
+            returnList.add(0);
+        }
+        for(Integer num : arr){
+            returnList.set(num, returnList.get(num)+1);
+        }
+        return returnList;
+    }
+
+    public static int flippingMatrix(List<List<Integer>> matrix) {
+        // Write your code here
+        int x = matrix.size() /2;
+        int max = 0;
+        int total = 0;
+        for (int row = 0; row<x ; row++){
+            for (int col = 0; col < x; col++){
+                max = Integer.MIN_VALUE;
+                max = Math.max(matrix.get(row).get(col), max);
+                max = Math.max(matrix.get(row).get( 2*x-col-1),max);
+                max = Math.max(matrix.get(2*x -row -1).get(col),max);
+                max = Math.max(matrix.get(2*x - row -1).get(2*x - col - 1), max);
+                total += max;
+            }
+        }
+        return total;
     }
 }
