@@ -1,15 +1,11 @@
 package com.example.problems;
 
-import java.io.*;
-import java.math.*;
-import java.security.*;
-import java.text.*;
-import java.util.*;
-import java.util.concurrent.*;
-import java.util.function.*;
-import java.util.regex.*;
-import java.util.stream.*;
-import static java.util.stream.Collectors.joining;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.List;
+import java.util.stream.Stream;
+
 import static java.util.stream.Collectors.toList;
 
 
@@ -21,35 +17,9 @@ public class MinMaxSum {
                 .map(Integer::parseInt)
                 .collect(toList());
 
-        MinMaxSumResult.miniMaxSum(arr);
+        Result.miniMaxSum(arr);
 
         bufferedReader.close();
     }
 }
 
-class MinMaxSumResult {
-
-    /*
-     * Complete the 'miniMaxSum' function below.
-     *
-     * The function accepts INTEGER_ARRAY arr as parameter.
-     */
-
-    public static void miniMaxSum(List<Integer> arr) {
-        // Write your code here
-        long minNum = arr.get(0);
-        long maxNum = arr.get(4);
-        long total = 0;
-        for (Integer num : arr){
-            if(num < minNum)
-                minNum = num;
-            if (num> maxNum)
-                maxNum = num;
-            total += num;
-        }
-        long maxSum = total - minNum;
-        long minSum = total - maxNum;
-        System.out.println(minSum + " " + maxSum);
-    }
-
-}

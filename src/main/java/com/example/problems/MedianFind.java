@@ -1,16 +1,14 @@
 package com.example.problems;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.List;
-import java.util.stream.Stream;
-
+import java.io.*;
+import java.util.*;
+import java.util.stream.*;
 import static java.util.stream.Collectors.toList;
 
-public class PlusMinus {
+public class MedianFind {
     public static void main(String[] args) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        //BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
 
         int n = Integer.parseInt(bufferedReader.readLine().trim());
 
@@ -18,8 +16,12 @@ public class PlusMinus {
                 .map(Integer::parseInt)
                 .collect(toList());
 
-        Result.plusMinus(arr);
+        int result = Result.findMedian(arr);
+        System.out.println(result);
+        //bufferedWriter.write(String.valueOf(result));
+        //bufferedWriter.newLine();
 
         bufferedReader.close();
+        //bufferedWriter.close();
     }
 }
