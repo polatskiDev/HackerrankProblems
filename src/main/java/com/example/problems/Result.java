@@ -2,10 +2,7 @@ package com.example.problems;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 public class Result {
 
@@ -116,7 +113,7 @@ public class Result {
     public static int flippingMatrix(List<List<Integer>> matrix) {
         // Write your code here
         int x = matrix.size() /2;
-        int max = 0;
+        int max;
         int total = 0;
         for (int row = 0; row<x ; row++){
             for (int col = 0; col < x; col++){
@@ -129,5 +126,85 @@ public class Result {
             }
         }
         return total;
+    }
+
+    public static int towerBreakers(int n, int m) {
+        // Write your code here
+        return (n % 2 == 0 || m == 1) ? 2 : 1;
+    }
+
+    public static String caesarCipher(String s, int k) {
+        // Write your code here
+        StringBuilder finalResult = new StringBuilder();
+        for (int i= 0; i< s.length(); i++){
+            if (Character.isLetter(s.charAt(i))){
+                if (Character.isUpperCase(s.charAt(i))) {
+                    char ch = (char)(((int)s.charAt(i) + k - 65) % 26 + 65);
+                    finalResult.append(ch);
+                }
+                else {
+                    char ch = (char)(((int)s.charAt(i) + k - 97) % 26 + 97);
+                    finalResult.append(ch);
+                }
+            } else
+                finalResult.append(s.charAt(i));
+        }
+        return finalResult.toString();
+    }
+
+    public static int palindromeIndex(String s) {
+        // Write your code here
+        int low = 0, high = s.length() - 1;
+
+        // loop until low and
+        // high cross each other
+        while (low < high)
+        {
+
+            // If both characters are equal then
+            // move both pointer towards end
+            if (s.charAt(low) == s.charAt(high))
+            {
+                low++;
+                high--;
+            }
+            else
+            {
+
+                /*
+                 * If removing str[low] makes the
+                 * whole string palindrome. We basically
+                 * check if substring str[low+1..high]
+                 * is palindrome or not.
+                 */
+                if (isPalindrome(s, low + 1, high))
+                    return low;
+
+                /*
+                 * If removing str[high] makes the whole string
+                 * palindrome. We basically check if substring
+                 * str[low+1..high] is palindrome or not.
+                 */
+                if (isPalindrome(s, low, high - 1))
+                    return high;
+                return 0;
+            }
+        }
+
+        // We reach here when complete string
+        // will be palindrome if complete string
+        // is palindrome then return mid character
+        return -1;
+    }
+
+    static boolean isPalindrome(String str, int low, int high) {
+        while (low < high)
+        {
+            if (str.charAt(low) != str.charAt(high))
+                return false;
+            low++;
+            high--;
+        }
+        return true;
     }
 }
