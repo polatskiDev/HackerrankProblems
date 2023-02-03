@@ -207,4 +207,87 @@ public class Result {
         }
         return true;
     }
+
+    public static String gridChallenge(List<String> grid) {
+        // Write your code here
+        boolean result = true;
+        List<String> gridList = new ArrayList<>();
+        for (int i=0; i< grid.size(); i++){
+            char [] gridArray = grid.get(i).toCharArray();
+            Arrays.sort(gridArray);
+            gridList.add(new String(gridArray));
+        }
+        for (int x= 0; x< grid.get(0).length(); x++){
+            for (int y = 1; y < grid.size(); y++){
+                if (gridList.get(y).charAt(x) < gridList.get(y-1).charAt(x)) {
+                    result = false;
+                    break;
+                }
+            }
+        }
+        return result ? "YES" : "NO";
+    }
+
+    public static int superDigit(String n, int k) {
+        // Write your code here
+        int temp = findSum(n) * k ;
+        if (temp > 9)
+            temp = findSum(String.valueOf(temp));
+        return temp;
+    }
+
+    private static int findSum(String num){
+        if (num.length() == 1)
+            return Integer.parseInt(num);
+        int sum = 0;
+        for (int x =0; x< num.length(); x++){
+            sum = sum + Integer.parseInt(String.valueOf(num.charAt(x)));
+        }
+        return findSum(String.valueOf(sum));
+    }
+
+    public static void minimumBribes(List<Integer> q) {
+        // Write your code here
+        int bribeNo = 0;
+        boolean chaotic = false;
+        for (int i = 0; i < q.size(); i++){
+            if (q.get(i) - (i+1) > 2){
+                chaotic = true;
+                break;
+            }
+            for (int j = i - 1; j >= q.get(i) - 2 && j >= 0; j--) {
+                if (q.get(j) > q.get(i))
+                    bribeNo++;
+            }
+        }
+        if (!chaotic){
+            System.out.println(bribeNo);
+        } else {
+            System.out.println("Too chaotic");
+        }
+    }
+
+    public static int truckTour(List<List<Integer>> petrolpumps) {
+        // Write your code here
+        final int size = petrolpumps.size();
+
+        for (int start = 0; start < size; start++) {
+            if (petrolpumps.get(start).get(0) < petrolpumps.get(start).get(1)) continue;
+
+            long tank = 0;
+            int position = start;
+            int pumpCount = 0;
+
+            while (true) {
+                if (pumpCount == size) return start; // all pumps has been visited
+                if (tank < 0) break;                 // not enough petrol to move further
+
+                tank += petrolpumps.get(position % size).get(0) - petrolpumps.get(position % size).get(1);
+
+                position++;
+                pumpCount++;
+            }
+        }
+        return -1;
+    }
 }
