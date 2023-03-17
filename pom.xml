@@ -12,7 +12,7 @@
     <artifactId>test</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>HackerrankProblems</name>
-    <description>test</description>
+    <description>Hackerrank Problems</description>
     <properties>
         <java.version>11</java.version>
     </properties>
